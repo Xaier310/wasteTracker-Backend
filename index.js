@@ -59,7 +59,8 @@ app.use("/api/volunteer", volRoute);
 const PORT = process.env.PORT || 8000;
 app.use(express.static(path.join(__dirname, "build")));
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+  // res.sendFile(path.join(__dirname, "build", "index.html"));
+  res.sendFile(__dirname+"/public/"+"index1.html");
 });
 app.listen(PORT, () => {
   console.log(`Server Running on port ${PORT}`);
