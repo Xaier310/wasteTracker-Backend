@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { request } = require("express");
 const Pin = require("../models/Pin");
+const axios = require("axios");
 
 //create a pin
 router.post("/", async (req, res) => {
@@ -23,11 +24,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+//single pin data
+router.get("/pindata/:pin_id", async (req, res) => {
+  try {
+    const pin = await Pin.findOne({_id:req.params.pin_id});
+    res.status(200).json(pin);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 //delete pin
 router.delete("/:pin_id", async (req, res) => {
   try {
-    // console.log("request made = ",req.params.pin_id);
     Pin.findByIdAndDelete(req.params.pin_id,(err,results)=>{
       if(err){
         res.status(500).json(err);

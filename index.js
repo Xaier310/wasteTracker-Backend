@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const app = express();
 const pinRoute = require("./routes/pins");
+var bodyParser = require('body-parser');
 const userRoute = require("./routes/users");
 const volRoute = require("./routes/volunteer");
 const userSchema = require("./models/User");
@@ -10,6 +11,7 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const path = require("path");
+const deleteImageRoute = require("./routes/deleteFile"); 
 var cors = require("cors");
 
 app.use(cors());
@@ -55,6 +57,7 @@ passport.deserializeUser(function (user, done) {
 app.use("/api/pins", pinRoute);
 app.use("/api/users", userRoute);
 app.use("/api/volunteer", volRoute);
+app.use("/deleteImage", deleteImageRoute);
 
 const PORT = process.env.PORT || 8000;
 app.use(express.static(path.join(__dirname, "build")));

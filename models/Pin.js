@@ -20,11 +20,15 @@ const PinSchema = new mongoose.Schema(
     volunteers: {
       type: Number,
     },
-    rating: {
-      type: Number,
-      required: true,
-      min: 0,
-      max: 5,
+    img: {
+      url:{
+        type: String,
+        required: true,
+      },
+      public_id:{
+        type: String,
+        required: true,
+      }
     },
     long: {
       type: Number,

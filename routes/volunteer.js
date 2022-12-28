@@ -24,7 +24,7 @@ router.post("/:currentPlaceId", async (req, res) => {
       const newVol = new Volunteer({
         username: req.body.username,
         pinId: req.body.pin_id,
-        email: user.email,
+        email: user?.email,
       });
       newVol.save((err, results)=>{
             if(err){
