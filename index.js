@@ -62,8 +62,7 @@ app.use("/deleteImage", deleteImageRoute);
 const PORT = process.env.PORT || 8000;
 app.use(express.static(path.join(__dirname, "build")));
 app.get("/*", (req, res) => {
-  // res.sendFile(path.join(__dirname, "build", "index.html"));
-  res.sendFile(__dirname+"/public/"+"index1.html");
+  res.send(`Backend running fine on port ${PORT}`);
 });
 app.listen(PORT, () => {
   console.log(`Server Running on port ${PORT}`);
