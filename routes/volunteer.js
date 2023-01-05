@@ -28,7 +28,7 @@ router.post("/:currentPlaceId", async (req, res) => {
       });
       newVol.save((err, results)=>{
             if(err){
-              res.status(500).json(err);
+              res.status(500).json("An unknown error occurred");
               console.log(err);
             }else{
               res.status(200).json("Volunteer added successfully");
@@ -37,7 +37,7 @@ router.post("/:currentPlaceId", async (req, res) => {
           });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
     console.log(err);
   }
 });
@@ -48,7 +48,7 @@ router.get("/:currentPlaceId", async (req, res) => {
     const pins = await Volunteer.find({ pinId: req.params.currentPlaceId });
     res.status(200).json(pins);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
 });
 
@@ -57,14 +57,14 @@ router.get("/", async (req, res) => {
     const pins = await Volunteer.find();
     res.status(200).json(pins);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
 });
 
 router.delete("/:currentPlaceId",(req,res)=>{
   Volunteer.deleteMany({pinId: req.params.currentPlaceId},(err,result)=>{
     if(err){
-      res.status(500).json(err);
+      res.status(500).json("An unknown error occurred");
     }else{
       res.status(200).json("Deleted voluteers of this location");
     }

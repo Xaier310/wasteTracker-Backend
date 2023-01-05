@@ -19,23 +19,20 @@ router.post("/register", async (req, res) => {
           // password: req.body.password,
         });
 
-  User.register(newUser, req.body.password, function (err, user) {
-    if (err) {
-      console.log(err);
-      // res.redirect("/register");
-      res.status(500).json(err);
-    } else {
-      passport.authenticate("local")(req, res, () => {
-        // res.redirect("/home");
-        res.status(200).json(user._id);
-      });
-    }
-  });
+    User.register(newUser, req.body.password, function (err, user) {
+      if (err) {
+        console.log(err);
+        res.status(500).json("An unknown error occurred");
+      } else {
+        passport.authenticate("local")(req, res, () => {
+          res.status(200).json(user._id);
+        });
+      }
+    });
   }
-  
   catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
   
 });
@@ -45,37 +42,37 @@ router.post("/login", async (req, res) => {
   try {
     //find user
     const user = await User.findOne({ username: req.body.username });
-    !user && res.status(400).json("Wrong username or password");
+    if(!user){ 
+      res.status(400).json("Wrong username or password");
+      return;
+    }
+    console.log("user:",user);
 
     //validate password
     req.login(user,async (err) => {
       if (err){
         console.log(err);
-        // res.redirect("/login");
-        res.status(500).json(err);
+        res.status(500).json("An unknown error occurred");
       }
-else{
-  passport.authenticate("local")(req, res, () => {
-    // res.redirect("/home");
-    res.status(200).json({ _id: user._id, username: user.username });
-  });
-}
-});
-}
-
+      else{
+        passport.authenticate("local")(req, res, () => {
+          res.status(200).json({ _id: user._id, username: user.username });
+        });
+      }
+    });
+  }  
   catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
 });
 
 router.post("/logout", async (req, res) => {
-try {
-  req.logout();
-  res.status(200).json("You are logged out");
-}
-
+  try {
+    req.logout();
+    res.status(200).json("You are logged out");
+  }
   catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
 });
 

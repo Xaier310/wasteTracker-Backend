@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     const savedPin = await newPin.save();
     res.status(200).json(savedPin);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
 });
 
@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     const pins = await Pin.find();
     res.status(200).json(pins);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
 });
 
@@ -30,7 +30,7 @@ router.get("/pindata/:pin_id", async (req, res) => {
     const pin = await Pin.findOne({_id:req.params.pin_id});
     res.status(200).json(pin);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
 });
 
@@ -40,13 +40,13 @@ router.delete("/:pin_id", async (req, res) => {
   try {
     Pin.findByIdAndDelete(req.params.pin_id,(err,results)=>{
       if(err){
-        res.status(500).json(err);
+        res.status(500).json("An unknown error occurred");
       }else{
         res.status(200).json("Deleted successfully");
       }
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json("An unknown error occurred");
   }
 });
 
