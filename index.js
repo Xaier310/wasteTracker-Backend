@@ -31,8 +31,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(
-  // `${process.env.MONGO_SERVER}`,
-  `mongodb://localhost:27017/WasteTracker`,
+  `${process.env.MONGO_SERVER}`,
+  // `mongodb://localhost:27017/WasteTracker`,
   (err) => {
     if (err) throw err;
     console.log("DB Connected Successfully");
