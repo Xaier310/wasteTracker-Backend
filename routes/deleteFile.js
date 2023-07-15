@@ -5,7 +5,6 @@ router.post("/", async (req,res)=>{
     //.env must contain CLOUDINARY_URL
     const publicId = req?.body?.publicId;
     if(!publicId) res.status(500).json("No any public id");
-    console.log(publicId);
     try{
         cloudinary.api
             .delete_resources([publicId])

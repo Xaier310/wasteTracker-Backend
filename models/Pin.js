@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { Volunteer } = require("./Volunteer");
 const PinSchema = new mongoose.Schema(
   {
     username: {
@@ -21,11 +20,11 @@ const PinSchema = new mongoose.Schema(
       type: Number,
     },
     img: {
-      url:{
+      url: {
         type: String,
         required: true,
       },
-      public_id:{
+      public_id: {
         type: String,
         required: true,
       }
@@ -42,4 +41,5 @@ const PinSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.models.Pin || mongoose.model("Pin", PinSchema);
+module.exports = mongoose.model("Pin", PinSchema);
+// module.exports = mongoose.models.Pin || mongoose.model("Pin", PinSchema);

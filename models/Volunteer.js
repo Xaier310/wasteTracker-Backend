@@ -8,13 +8,13 @@ const VolSchema = new mongoose.Schema(
       min: 3,
       max: 20
     },
-    pinId:{
-    type:String,
-    require:true,
+    pinId: {
+      type: String,
+      require: true,
     },
-    email:{
-      type:String,
-      require:true,
+    email: {
+      type: String,
+      require: true,
     }
   },
   { timestamps: true }
