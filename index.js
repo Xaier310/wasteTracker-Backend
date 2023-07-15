@@ -36,9 +36,9 @@ app.use(passport.session());
 
 //MongoDB connection
 mongoose.connect(
-  // `${process.env.MONGO_SERVER}`,
+  `${process.env.MONGO_SERVER}`,
   // `mongodb://localhost:27017/WasteTracker`,
-  `mongodb://127.0.0.1/WasteTracker`
+  // `mongodb://127.0.0.1/WasteTracker`
 );
 //after schemas
 userSchema.plugin(passportLocalMongoose);
