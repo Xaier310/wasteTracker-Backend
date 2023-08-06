@@ -7,12 +7,11 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 userSchema.plugin(passportLocalMongoose);
-let User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 passport.use(User.createStrategy());
 
 //REGISTER
 router.post("/register", async (req, res) => {
-
   try {
     const newUser = new User({
       username: req.body.username,
@@ -73,5 +72,14 @@ router.post("/logout", async (req, res) => {
     res.status(500).json("An unknown error occurred");
   }
 });
+
+router.post("/getuser", async (req,res)=>{
+  try{
+    const user = await User.findOne(req.body); //"_id":"644ec8706ac7d2fbc502298d"
+    res.status("200").json(user);
+  }catch(err){
+    res.status(500).json(err.message);
+  }
+})
 
 module.exports = router;

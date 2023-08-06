@@ -2,20 +2,13 @@ const mongoose = require("mongoose");
 
 const VolSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
-      require: true,
-      min: 3,
-      max: 20
-    },
     pinId: {
-      type: String,
-      require: true,
+      type:  mongoose.Schema.Types.ObjectId,
+      ref: 'Pin',
+      required: true,
+      unique:true
     },
-    email: {
-      type: String,
-      require: true,
-    }
+    userIds: [{type:mongoose.Schema.Types.ObjectId, ref:'User'}]
   },
   { timestamps: true }
 );

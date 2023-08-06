@@ -1,33 +1,16 @@
 const mongoose = require("mongoose");
 const PinSchema = new mongoose.Schema(
   {
-    username: {
-      type: String,
+    userId: {
+      type:  mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
-    title: {
-      type: String,
-      required: true,
-      min: 3,
-      max: 60,
-    },
-    desc: {
-      type: String,
-      required: true,
-      min: 3,
-    },
-    volunteers: {
-      type: Number,
-    },
+    title: String,
+    desc: String,
     img: {
-      url: {
-        type: String,
-        required: true,
-      },
-      public_id: {
-        type: String,
-        required: true,
-      }
+      url: String,
+      public_id: String,
     },
     long: {
       type: Number,
@@ -42,4 +25,4 @@ const PinSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("Pin", PinSchema);
-// module.exports = mongoose.models.Pin || mongoose.model("Pin", PinSchema);
+module.exports.PinSchema = PinSchema;
