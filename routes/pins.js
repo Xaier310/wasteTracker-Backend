@@ -58,6 +58,4 @@ router.delete("/:pin_id", async (req, res) => {
   }
 });
 
-router.post("/getUser")
-
 module.exports = router;

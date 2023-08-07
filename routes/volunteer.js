@@ -85,10 +85,8 @@ router.get("/:currentPlaceId", async (req, res) => {
 //get all volunteers
 router.get("/", async (req, res) => {
   try {
-    console.log("/all");
-    const pins = await Volunteer.find();
-    console.log(pins);
-    res.status(200).json(pins);
+    const volunteers = await Volunteer.find();
+    res.status(200).json(volunteers);
   } catch (err) {
     res.status(500).json(err.message);
   }

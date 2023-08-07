@@ -13,6 +13,8 @@ passport.use(User.createStrategy());
 //REGISTER
 router.post("/register", async (req, res) => {
   try {
+    if(!req.body.username || !req.body.password) throw { message: "Username or Password is incorrect" };
+    req.body.username = req.body.username.toLowerCase();
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
@@ -21,7 +23,7 @@ router.post("/register", async (req, res) => {
     User.register(newUser, req.body.password, function (err, user) {
       if (err) {
         console.log(err);
-        res.status(500).json("An unknown error occurred");
+        res.status(500).json(err.message);
       } else {
         passport.authenticate("local")(req, res, () => {
           res.status(200).json(user._id);
@@ -31,15 +33,16 @@ router.post("/register", async (req, res) => {
   }
   catch (err) {
     console.log(err);
-    res.status(500).json("An unknown error occurred");
+    res.status(500).json(err.message);
   }
-
 });
 
 //LOGIN
 router.post("/login", async (req, res) => {
   try {
     //find user
+    if(!req.body.username || !req.body.password) throw { message: "Username or Password is incorrect" };
+    req.body.username = req.body.username.toLowerCase();
     const user = await User.findOne({ username: req.body.username });
     if (!user) {
       res.status(400).json("Wrong username or password");
@@ -49,7 +52,7 @@ router.post("/login", async (req, res) => {
     req.login(user, async (err) => {
       if (err) {
         console.log(err);
-        res.status(500).json("An unknown error occurred");
+        res.status(500).json(err.message);
       }
       else {
         passport.authenticate("local")(req, res, () => {
@@ -59,7 +62,7 @@ router.post("/login", async (req, res) => {
     });
   }
   catch (err) {
-    res.status(500).json("An unknown error occurred");
+    res.status(500).json(err.message);
   }
 });
 
@@ -69,7 +72,7 @@ router.post("/logout", async (req, res) => {
     res.status(200).json("You are logged out");
   }
   catch (err) {
-    res.status(500).json("An unknown error occurred");
+    res.status(500).json(err.message);
   }
 });
 

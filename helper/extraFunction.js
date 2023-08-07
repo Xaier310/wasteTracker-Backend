@@ -14,13 +14,13 @@ const addUsernameInPins = async (pin)=>{
 }
 
 const getPinObj = async (filter) =>{
-    const pinObjId = await Pin.findOne(filter); //filter = {_id:pinId}
-    return pinObjId;
+    const pinObj = await Pin.findOne(filter); //filter = {_id:pinId}
+    return pinObj;
 }
 
 const getUserObj = async (filter) => {
-    const userObjId = await User.findOne(filter); //filter = {username:username}, {_id:userId}
-    return userObjId
+    const userObj = await User.findOne(filter); //filter = {username:username}, {_id:userId}
+    return userObj
 }
 
 module.exports = {addUsernameInPins, getPinObj, getUserObj}
