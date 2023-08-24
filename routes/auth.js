@@ -44,11 +44,4 @@ router.post('/logout', (req, res) => {
     res.json("You are logged out");
 });
 
-//Verify jwt token
-router.get("/verify_jwt",(req,res)=>{
-    console.log("req made");
-    console.log(req.cookies);
-    res.json("jwt")
-});
-
 module.exports = router;
